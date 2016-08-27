@@ -1,0 +1,6 @@
+.Rhistory
+.Rprofile
+.Rproj.user
+*.pyc
+data
+ghostdriver.log
