@@ -38,16 +38,22 @@ ParseFileAllYears <- function(file_dir, file_pattern, out_file){
                 colnames(new_df) <- paste0("V", 1:ncol(new_df))
                 rm(new_df1, new_df2)
             }
-            
+
             result <- rbind(result, new_df)
         }
         for (col in colnames(result)) {
-            result[,col] <- str_sub(result[,col], 2, -2) %>% 
+            result[,col] <- str_sub(result[,col], 2, -2) %>%
                 gsub("\"", "\"\"", .)
         }
+
+        if (file_pattern == 'perfil_eleitor_secao_.*_PB.txt') {
+            # Select the CG records only
+            result <- filter(result, V6 == 'CAMPINA GRANDE')
+        }
+
         result
     }
-    
+
     if (!file.exists(out_file)) {
         df <- ReadFileAllYears(file_dir, file_pattern)
         write_csv(df, path = out_file, col_names = F, na = "")
