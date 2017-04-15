@@ -2,5 +2,5 @@
 .Rprofile
 .Rproj.user
 *.pyc
+*.log
 data
-ghostdriver.log
